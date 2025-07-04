@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <climits>
 using namespace std;
 
 ///////////////////////////////////////////////////////////////
@@ -21,13 +23,13 @@ void checkSorted(int arr[], int n) {
     bool sorted = true;
     for (int i = 0; i < n - 1; i++) {
         if (arr[i] > arr[i + 1]) {
-            cout << "Array is Not Sorted" << endl;
+            cout << "❌ Array is Not Sorted\n";
             sorted = false;
             break;
         }
     }
     if (sorted) {
-        cout << "Array is Sorted" << endl;
+        cout << "✅ Array is Sorted\n";
     }
 }
 
@@ -35,7 +37,7 @@ void checkSorted(int arr[], int n) {
 // ➕ Function 3: Move All Zeroes to the End
 ///////////////////////////////////////////////////////////////
 void moveZeroToEnd(int arr[], int n) {
-    int count = 0;  // Position to place the next non-zero element
+    int count = 0;  // Index to place next non-zero
     for (int i = 0; i < n; i++) {
         if (arr[i] != 0) {
             arr[count++] = arr[i];
@@ -47,24 +49,75 @@ void moveZeroToEnd(int arr[], int n) {
 }
 
 ///////////////////////////////////////////////////////////////
+// 🥈 Function 4: Find Second Maximum Element
+///////////////////////////////////////////////////////////////
+void secondMax(int arr[], int n) {
+    int max = INT_MIN;
+    int second = INT_MIN;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] > max) {
+            second = max;
+            max = arr[i];
+        } else if (arr[i] > second && arr[i] != max) {
+            second = arr[i];
+        }
+    }
+
+    if (second == INT_MIN) {
+        cout << "⚠️ No second maximum (all elements might be same)\n";
+    } else {
+        cout << "🥈 Second Maximum: " << second << endl;
+    }
+}
+
+///////////////////////////////////////////////////////////////
+// 🔁 Function 5: Check if a Word is a Palindrome
+///////////////////////////////////////////////////////////////
+bool isPalindrome(string word, int start, int end) {
+    while (start < end) {
+        if (word[start] != word[end]) return false;
+        start++;
+        end--;
+    }
+    return true;
+}
+
+///////////////////////////////////////////////////////////////
 // 🧪 Main Function
 ///////////////////////////////////////////////////////////////
 int main() {
-    // ✅ Initialize array and find size
-    int arr[] = {10, 0, 50, 55, 60};
+    ///////////////////////////////////////////////////////////
+    // 🎯 Sample Array
+    ///////////////////////////////////////////////////////////
+    int arr[] = {10, 59, 0, 50, 55, 60};
     int size = sizeof(arr) / sizeof(arr[0]);
 
-    // ➕ Move all zeroes to the end
-    cout << "\n👉 After Moving Zeroes to End:\n";
+    ///////////////////////////////////////////////////////////
+    // 🥈 Find Second Maximum
+    ///////////////////////////////////////////////////////////
+    secondMax(arr, size);
+
+    ///////////////////////////////////////////////////////////
+    // 🔠 Check Palindrome
+    ///////////////////////////////////////////////////////////
+    string word = "madam";
+    cout << "\n🔍 Checking if \"" << word << "\" is a Palindrome:\n";
+    bool result = isPalindrome(word, 0, word.length() - 1);
+    cout << (result ? "✅ It is a palindrome\n" : "❌ It is not a palindrome\n");
+
+    ///////////////////////////////////////////////////////////
+    // ➕ Move Zeroes to End
+    ///////////////////////////////////////////////////////////
     moveZeroToEnd(arr, size);
-    for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
-    }
+    cout << "\n👉 After Moving Zeroes to End:\n";
+    for (int i = 0; i < size; i++) cout << arr[i] << " ";
     cout << "\n";
 
-    // ✅ Find Maximum and Minimum
-    int max = arr[0];
-    int min = arr[0];
+    ///////////////////////////////////////////////////////////
+    // 🔼 Find Maximum and Minimum
+    ///////////////////////////////////////////////////////////
+    int max = arr[0], min = arr[0];
     for (int i = 1; i < size; i++) {
         if (arr[i] > max) max = arr[i];
         if (arr[i] < min) min = arr[i];
@@ -72,26 +125,30 @@ int main() {
     cout << "\n🔹 Maximum Element: " << max << endl;
     cout << "🔹 Minimum Element: " << min << endl;
 
-    // 🔁 Reverse the array
+    ///////////////////////////////////////////////////////////
+    // 🔁 Reverse the Array
+    ///////////////////////////////////////////////////////////
     reverseArray(arr, size);
-    cout << "\n👉 After Reversing the Array:\n";
-    for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
-    }
+    cout << "\n🔁 After Reversing the Array:\n";
+    for (int i = 0; i < size; i++) cout << arr[i] << " ";
     cout << "\n";
 
-    // 📊 Check if the reversed array is sorted
+    ///////////////////////////////////////////////////////////
+    // 📊 Check if Sorted
+    ///////////////////////////////////////////////////////////
     cout << "\n🧪 Sorted Check:\n";
     checkSorted(arr, size);
 
-    // 🔄 Print array in reverse order (again)
+    ///////////////////////////////////////////////////////////
+    // 🔁 Print Elements in Reverse Order
+    ///////////////////////////////////////////////////////////
     cout << "\n🔁 Elements in Reverse Order:\n";
-    for (int i = size - 1; i >= 0; i--) {
-        cout << arr[i] << " ";
-    }
+    for (int i = size - 1; i >= 0; i--) cout << arr[i] << " ";
     cout << "\n";
 
-    // 📏 Print array size
+    ///////////////////////////////////////////////////////////
+    // 📏 Print Array Size
+    ///////////////////////////////////////////////////////////
     cout << "\n📏 Size of the Array: " << size << endl;
 
     return 0;
