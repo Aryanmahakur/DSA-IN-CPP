@@ -154,7 +154,45 @@ void deleteAtPos(node*& head, int pos) {
     temp->next = temp->next->next;
     delete toDelete;
 }
+int findpos(node* &head,int searchdata){
+    int count=0;
+    node* temp=head;
+   while (temp != nullptr) {
+    if (temp->data == searchdata)
+        return count;
+    temp = temp->next;
+    count++;
+}
 
+    return 0;
+};
+node* reverselinkedlist(node* head){
+    node* temp=head;
+    node* next=nullptr;
+    node* prev=nullptr;
+
+    while (temp!=nullptr){
+        next=temp->next;
+        temp->next=prev;
+        prev=temp;
+        temp=next;
+    }
+    head=prev;
+    return head;
+    
+}
+void  middle(node* head){
+    node* slow=head;
+    node* fast=head;
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        /* code */
+    }
+    cout<<slow->data<<endl;
+    
+}
 // ---------------------------
 // Main Function
 // ---------------------------
@@ -163,7 +201,13 @@ int main() {
     head->next = new node(20);
     head->next->next = new node(30);
     head->next->next->next = new node(40);
+     middle(head);
+    head = reverselinkedlist(head);  // Reverse and reassign
 
+    cout << "Reversed List: ";
+    printList(head);
+    int a= findpos(head,10);
+    cout<<"pos"<<a<<endl ;
     deleteAtPos(head, 2);             // Delete node at position 2 (30)
     printList(head);
 
@@ -180,4 +224,3 @@ int main() {
 
     return 0;
 }
-aaa

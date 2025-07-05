@@ -1,1 +1,1 @@
-arr[count++] = 0;
+fast != nullptr &&
