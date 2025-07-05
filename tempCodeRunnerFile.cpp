@@ -1,1 +1,1 @@
-fast != nullptr &&
+    while (fast != nullptr && fast->next != nullptr)
