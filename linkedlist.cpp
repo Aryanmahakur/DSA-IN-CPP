@@ -193,19 +193,19 @@ int findpos(node *&head, int searchdata)
 };
 node *reverselinkedlist(node *head)
 {
-    node *temp = head;
-    node *next = nullptr;
-    node *prev = nullptr;
-
-    while (temp != nullptr)
-    {
-        next = temp->next;
-        temp->next = prev;
-        prev = temp;
-        temp = next;
+    node* temp=head;
+    node* prev=nullptr;
+    node* next=nullptr;
+    while (temp!=nullptr){
+        next=temp->next;
+        temp->next=prev;
+        prev=temp;
+        temp=next;
     }
-    head = prev;
+
+    head=prev;
     return head;
+
 }
 void middle(node *head)
 {
@@ -390,7 +390,8 @@ int main()
     head1->next = new node(25);
     head1->next->next = new node(35);
     head1->next->next->next = new node(45);
-    merger(head,head1);
+  //  merger(head,head1);
+ reverselinkedlist(head);
     printList(head);
     //  head->next->next->next->next = head->next; // create loop: 40 → 20
 
