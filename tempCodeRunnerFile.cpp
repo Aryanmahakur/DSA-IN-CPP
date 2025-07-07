@@ -1,1 +1,1 @@
-    while (fast != nullptr && fast->next != nullptr)
+    if(!st.empty()){

@@ -79,6 +79,28 @@ void deletelast(Node *&head)
     delete temp->next;
     temp->next = nullptr;
 }
+ void insertAtBeginning(int data) {
+        Node* newNode = new Node(data);
+
+        // Case 1: Empty list
+        if (head == nullptr) {
+            head = newNode;
+            head->next = head;
+            head->prev = head;
+            return;
+        }
+
+        // Case 2: Non-empty list
+        Node* last = head->prev;
+
+        newNode->next = head;
+        newNode->prev = last;
+
+        head->prev = newNode;
+        last->next = newNode;
+
+        head = newNode;  // update head to new node
+    }
 void deleteatpos(Node *&head, int pos)
 {
     if (head == nullptr)
