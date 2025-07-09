@@ -208,36 +208,27 @@ int main() {
     return 0;
 }
 #include <iostream>
-#include <stack>
+#include <queue>
 using namespace std;
 
 int main() {
-    // Declare a stack of integers
-    stack<int> st;
+    queue<int> q;
 
-    // Push elements into the stack
-    st.push(10);
-    st.push(20);
-    st.push(30);
+    q.push(10);
+    q.push(20);
+    q.push(30);
 
-    // Display top element
-    cout << "Top element: " << st.top() << endl;  // 30
-    cout << "Stack size: " << st.size() << endl;  // 3
+    cout << "Front: " << q.front() << endl; // 10
+    cout << "Back: " << q.back() << endl;   // 30
 
-    // Pop the top element
-    st.pop();  // removes 30
+    q.pop(); // removes 10
 
-    cout << "\nAfter one pop:\n";
-    cout << "Top element: " << st.top() << endl;  // 20
-    cout << "Stack size: " << st.size() << endl;  // 2
+    cout << "Front after pop: " << q.front() << endl; // 20
 
-    // Print all elements (and empty stack)
-    cout << "\nRemaining elements in stack: ";
-    while (!st.empty()) {
-        cout << st.top() << " ";
-        st.pop();
+    while (!q.empty()) {
+        cout << q.front() << " ";
+        q.pop();
     }
-    cout << endl;
 
     return 0;
 }
