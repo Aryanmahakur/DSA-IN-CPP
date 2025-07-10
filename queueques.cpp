@@ -53,9 +53,8 @@ int main() {
 #include <iostream>
 #include <queue>
 using namespace std;
-
-class Stack {
-    queue<int> q1, q2;
+class stack{
+  queue<int> q1, q2;
 
 public:
     // Push element onto the stack
@@ -63,60 +62,39 @@ public:
         q1.push(x);
     }
 
-    // Remove the top element
-    void pop() {
-        if (q1.empty()) {
-            cout << "Stack is empty\n";
-            return;
-        }
-
-        // Move all elements except the last to q2
-        while (q1.size() > 1) {
-            q2.push(q1.front());
-            q1.pop();
-        }
-
-        // Remove the last element (top of the stack)
+   void pop(){
+    while (q1.size()>1)
+    {
+        q2.push(q1.front());
         q1.pop();
-
-        // Swap q1 and q2
-        swap(q1, q2);
+        /* code */
     }
-
-    // Return the top element
-    int top() {
-        if (q1.empty()) {
-            cout << "Stack is empty\n";
-            return -1;
-        }
-
-        int topElement;
-
-        // Move all elements except the last to q2
-        while (q1.size() > 1) {
-            q2.push(q1.front());
-            q1.pop();
-        }
-
-        // Get the last element
-        topElement = q1.front();
-        q2.push(topElement);
+    cout<<"deleted"<<q1.front()<<endl;
+    q1.pop();
+    swap(q1,q2);
+    
+   }
+   void top(){
+     while (q1.size()>1)
+    {
+        q2.push(q1.front());
         q1.pop();
-
-        // Swap queues
-        swap(q1, q2);
-
-        return topElement;
+        /* code */
     }
-
-    // Check if the stack is empty
-    bool empty() {
-        return q1.empty();
-    }
+    cout<<"top"<<q1.front()<<endl;
+   int temp = q1.front();
+   q2.push(temp);
+   q1.pop();
+  swap(q1,q2);
+    
+   }
+   bool isempty(){
+    return q1.empty();
+   }
 };
 
 int main() {
-    Stack s;
+    stack s;
 
     s.push(10);
     s.push(20);
@@ -135,3 +113,102 @@ int main() {
 
     return 0;
 }
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+void genratebinary(int n)
+{
+    queue<string>st;
+    st.push("1");
+    for (int i = 0; i < n; i++)
+    {
+        cout<<st.front()<<endl;
+        string c=st.front();
+        st.pop();
+        /* code */
+        st.push(c+"0");
+        st.push(c+"1");
+    }
+
+    
+}
+
+
+void leave(){
+ queue<int>q1;
+ queue<int>q2;
+ queue<int>result;
+ q1.push(1);
+ q1.push(2);
+ q1.push(3);
+ q1.push(4);
+ q1.push(5);
+ q1.push(6);
+
+ int size=q1.size()/2;
+
+for (int i = 0; i < size; i++)
+{
+ q2.push(q1.front());
+ q1.pop();
+ /* code */
+}
+
+for (int i = 0; i < size; i++)
+{
+ /* code */
+ result.push(q2.front());
+ q2.pop();
+ result.push(q1.front());
+ q1.pop();
+
+}
+
+while(!result.empty())
+{
+  cout<<result.front()<<endl;
+  result.pop();
+ /* code */
+}
+
+
+ 
+
+
+
+
+};
+int main() {
+    int N = 5;
+   // generateBinaryNumbers(N);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return 0;
+
+
+};
