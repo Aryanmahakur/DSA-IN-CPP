@@ -16,11 +16,27 @@ struct Node {
 
 // Recursive function to find the maximum value
 int findMax(Node* root) {
-    if(root==nullptr)return INT_MIN;
-    int max1=findMax(root->left);
-    int max2=findMax(root->right);
-    return max(root->data,max(max1,max2));
+   if(root==nullptr)return INT_MIN;
+   int left=findMax(root->left);
+   int right=findMax(root->right);
+   return max(root->data,max(left,right));
    };
+   int findheight(Node* root) {
+    if (root == nullptr) return 0;
+
+    int left = findheight(root->left);   // ✅ should call itself recursively
+   // int right = findheight(root->right); // ✅ same here
+
+    return 1  +left;
+}
+
+        1
+       / \
+      2   3
+     /   / \
+    4   5   6
+           /
+          7
 
 int main() {
     /*
