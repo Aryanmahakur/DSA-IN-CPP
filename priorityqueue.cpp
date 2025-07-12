@@ -37,21 +37,35 @@ void builtInMaxHeap() {
 
 class MaxHeap {
     vector<int> heap;
+void heapify(int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    int n = heap.size();
 
-    void heapify(int i) {
-        int largest = i;
+    if (left < n && heap[left] > heap[largest])
+        largest = left;
+
+    if (right < n && heap[right] > heap[largest])
+        largest = right;
+
+    if (largest != i) {
+        swap(heap[i], heap[largest]);
+        heapify(largest);
+    }
+}
+bool isMaxHeap(const vector<int>& heap) {
+    int n = heap.size();
+    for (int i = 0; i <= (n - 2) / 2; ++i) {
         int left = 2 * i + 1;
         int right = 2 * i + 2;
-        int n = heap.size();
-
-        if (left < n && heap[left] > heap[largest]) largest = left;
-        if (right < n && heap[right] > heap[largest]) largest = right;
-
-        if (largest != i) {
-            swap(heap[i], heap[largest]);
-            heapify(largest);
-        }
+        if (left < n && heap[i] < heap[left]) return false;
+        if (right < n && heap[i] < heap[right]) return false;
     }
+    return true;
+}
+
+    
 
 public:
     void insert(int val) {
@@ -225,5 +239,101 @@ int main() {
     manualMaxHeapTest();  // Your MaxHeap class
     manualMinHeapTest();  // Your MinHeap class
     builtInMinHeap();     // Uses priority_queue<int, vector<int>, greater<int>>
+    return 0;
+}
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int kthLargest(const vector<int>& heap, int k) {
+    int n = heap.size();
+    priority_queue<pair<int, int>> pq;
+    pq.push({heap[0], 0});
+    vector<bool> visited(n, false);
+    visited[0] = true;
+
+    int count = 0;
+    while (!pq.empty()) {
+        auto [val, idx] = pq.top(); pq.pop();
+        count++;
+        if (count == k) return val;
+
+        int left = 2 * idx + 1;
+        int right = 2 * idx + 2;
+
+        if (left < n && !visited[left]) {
+            pq.push({heap[left], left});
+            visited[left] = true;
+        }
+
+        if (right < n && !visited[right]) {
+            pq.push({heap[right], right});
+            visited[right] = true;
+        }
+    }
+
+    return -1;
+}
+
+int main() {
+    vector<int> heap = {50, 30, 40, 10, 5, 20, 35};
+    int k = 3;
+    cout << k << "rd largest: " << kthLargest(heap, k) << endl;
+}
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int kthLargest(const vector<int>& arr, int k) {
+    // Min Heap
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+int count=0;
+    for (int num : arr) {
+        minHeap.push(num);
+        count++;
+        if (count >k) {
+            minHeap.pop(); // Remove the smallest
+        }
+    }
+
+    return minHeap.top(); // Kth largest
+}
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+int kthSmallest(const vector<int>& arr, int k) {
+    // Max Heap
+    priority_queue<int> maxHeap;
+    int count = 0;
+
+    for (int num : arr) {
+        maxHeap.push(num);
+        count++;
+        if (count > k) {
+            maxHeap.pop(); // Remove the largest among k+1 → keep k smallest
+        }
+    }
+
+    return maxHeap.top(); // K-th smallest
+}
+
+int main() {
+    vector<int> arr = {7, 10, 4, 3, 20, 15};
+    int k = 3;
+    cout << "K-th Smallest Element: " << kthSmallest(arr, k) << endl;
+    return 0;
+}
+
+int main() {
+    vector<int> arr = {50, 30, 40, 10, 5, 20, 35};
+    int k = 3;
+
+    cout << k << "rd largest using min-heap: " << kthLargest(arr, k) << endl;
     return 0;
 }
