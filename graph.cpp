@@ -181,7 +181,7 @@ int main() {
         int u, v;
         cin >> u >> v;
 
-        // Undirected edgeaaaa
+        // Undirected edgeaaa
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
