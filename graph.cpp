@@ -309,7 +309,7 @@ int numIslands(vector<vector<char>>& grid) {
     }
 
     return count;
-}aaaa
+}aaa
 
 int main() {
     vector<vector<char>> grid = {
