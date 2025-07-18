@@ -292,23 +292,7 @@ void dfs(int i, int j, vector<vector<char>>& grid, vector<vector<bool>>& visited
 }
 
 int numIslands(vector<vector<char>>& grid) {
-    if (grid.empty()) return 0;
-
-    int rows = grid.size();
-    int cols = grid[0].size();
-    vector<vector<bool>> visited(rows, vector<bool>(cols, false));
-    int count = 0;
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            if (grid[i][j] == '1' && !visited[i][j]) {
-                dfs(i, j, grid, visited);
-                count++;
-            }
-        }
-    }
-
-    return count;
+   
 }
 
 int main() {
