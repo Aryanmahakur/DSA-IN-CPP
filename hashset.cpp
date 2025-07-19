@@ -5,7 +5,7 @@
 // int main() {
 //     // Declare an unordered_set (HashSet)
 //     unordered_set<int> hashSet;
-//     //set<int> hashSet; for sorted 
+//     //set<int> hashSet; for sorted
 
 //     // Insert elements into the set
 //     hashSet.insert(10);
@@ -110,7 +110,8 @@
 #include <unordered_set>
 #include <vector>
 using namespace std;
-vector<int> unionOfArrays(const vector<int>& a, const vector<int>& b) {
+vector<int> unionOfArrays(const vector<int> &a, const vector<int> &b)
+{
     unordered_set<int> resultSet;
 
     for (int num : a)
@@ -123,8 +124,8 @@ vector<int> unionOfArrays(const vector<int>& a, const vector<int>& b) {
     return result;
 }
 
-
-int main() {
+int main()
+{
     vector<int> arr1 = {1, 2, 3, 4, 5};
     vector<int> arr2 = {3, 4, 5, 6, 7};
 
@@ -147,31 +148,103 @@ using namespace std;
 #include <unordered_set>
 using namespace std;
 
-vector<int> findIntersection(vector<int>& arr1, vector<int>& arr2) {
-    unordered_set<int> set1(arr1.begin(), arr1.end());  // Insert all from arr1
+vector<int> findIntersection(vector<int> &arr1, vector<int> &arr2)
+{
+    unordered_set<int> set1(arr1.begin(), arr1.end()); // Insert all from arr1
     unordered_set<int> resultSet;
 
-    for (int num : arr2) {
-        if (set1.contains(num)) {
-            resultSet.insert(num);  // Only insert if present in both
+    for (int num : arr2)
+    {
+        if (set1.contains(num))
+        {
+            resultSet.insert(num); // Only insert if present in both
         }
     }
 
-    return vector<int>(resultSet.begin(), resultSet.end());  // Convert set to vector
+    return vector<int>(resultSet.begin(), resultSet.end()); // Convert set to vector
 }
 
-
-int main() {
+int main()
+{
     vector<int> arr1 = {1, 2, 2, 3, 4};
     vector<int> arr2 = {2, 3, 5};
 
     vector<int> intersection = findIntersection(arr1, arr2);
 
     cout << "Intersection: ";
-    for (int num : intersection) {
+    for (int num : intersection)
+    {
         cout << num << " ";
     }
 
     return 0;
 }
+#include <iostream>
+#include <vector>
+#include <list>
+#include <functional> // for std::hash
 
+using namespace std;
+
+template <typename T>
+class HashSet {
+private:
+    static const int SIZE = 10;
+    vector<list<T>> table;
+
+    int hashFunction(T key) {
+        return hash<T>{}(key) % SIZE;
+    }
+
+public:
+    HashSet() {
+        table.resize(SIZE);
+    }
+
+    void insert(T key) {
+        int index = hashFunction(key);
+        for (auto& item : table[index]) {
+            if (item == key) return; // already exists
+        }
+        table[index].push_back(key);
+    }
+
+    bool find(T key) {
+        int index = hashFunction(key);
+        for (auto& item : table[index]) {
+            if (item == key) return true;
+        }
+        return false;
+    }
+
+    void remove(T key) {
+        int index = hashFunction(key);
+        auto& bucket = table[index];
+        for (auto it = bucket.begin(); it != bucket.end(); ++it) {
+            if (*it == key) {
+                bucket.erase(it);
+                return;
+            }
+        }
+    }
+
+    void display() {
+        for (int i = 0; i < SIZE; ++i) {
+            cout << "Bucket " << i << ": ";
+            for (auto& item : table[i]) {
+                cout << "[" << item << "] ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+Initial HashSet:
+Bucket 3: [apple] 
+Bucket 7: [banana] [cherry] 
+
+Finding 'banana': Found
+
+After deleting 'banana':
+Bucket 3: [apple] 
+Bucket 7: [cherry]
