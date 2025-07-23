@@ -248,4 +248,4 @@ Finding 'banana': Found
 After deleting 'banana':
 Bucket 3: [apple] 
 Bucket 7: [cherry]
-d
+s
