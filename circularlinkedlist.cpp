@@ -52,7 +52,7 @@ void insertAtTail(Node *&head, int val)
 
     while (temp->next != head)
     {
-        temp = temp->next;aaa
+        temp = temp->next;aa
     }
 
     temp->next = newNode;
