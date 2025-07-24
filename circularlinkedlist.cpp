@@ -1,6 +1,262 @@
 #include <iostream>
 using namespace std;
 
+// Node definition
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int val)
+    {
+        data = val;
+        next = nullptr;
+    }
+};
+
+// Insert at head
+void insertAtHead(Node *&head, int val)
+{
+    Node *newNode = new Node(val);
+
+    if (head == nullptr)
+    {
+        newNode->next = newNode;
+        head = newNode;
+        return;
+    }
+
+    Node *temp = head;
+    while (temp->next != head)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = newNode;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Insert at tail
+void insertAtTail(Node *&head, int val)
+{
+    if (head == nullptr)
+    {
+        insertAtHead(head, val);
+        return;
+    }
+
+    Node *newNode = new Node(val);
+    Node *temp = head;
+
+    while (temp->next != head)
+    {
+        temp = temp->next;a
+    }
+
+    temp->next = newNode;
+    newNode->next = head;
+}
+
+// Delete head node
+void deleteAtHead(Node *&head)
+{
+    if (head == nullptr)
+        return;
+
+    if (head->next == head) // only one node
+    {
+        delete head;
+        head = nullptr;
+        return;
+    }
+
+    Node *temp = head;
+    Node *last = head;
+
+    while (last->next != head)
+    {
+        last = last->next;
+    }
+
+    head = head->next;
+    last->next = head;
+    delete temp;
+}
+
+// Delete by value
+void deleteByValue(Node *&head, int val)
+{
+    if (head == nullptr)
+        return;
+
+    if (head->data == val)
+    {
+        deleteAtHead(head);
+        return;
+    }
+
+    Node *curr = head;
+
+    while (curr->next != head && curr->next->data != val)
+    {
+        curr = curr->next;
+    }
+
+    if (curr->next == head)
+    {
+        cout << "Value not found!" << endl;
+        return;
+    }
+
+    Node *toDelete = curr->next;
+    curr->next = curr->next->next;
+    delete toDelete;
+}
+
+// Search
+bool search(Node *head, int key)
+{
+    if (head == nullptr)
+        return false;
+
+    Node *temp = head;
+    do
+    {
+        if (temp->data == key)
+            return true;
+        temp = temp->next;
+    } while (temp != head);
+
+    return false;
+}
+
+// Display
+void display(Node *head)
+{
+    if (head == nullptr)
+    {
+        cout << "List is empty." << endl;
+        return;
+    }
+
+    Node *temp = head;
+    cout << "Circular Linked List: ";
+    do
+    {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    } while (temp != head);
+    cout << "(back to head)" << endl;
+}
+
+// MAIN
+int main()
+{
+    Node *head = nullptr;
+
+    insertAtTail(head, 10);
+    insertAtTail(head, 20);
+    insertAtTail(head, 30);
+    insertAtHead(head, 5);
+
+    display(head); // Output: 5 -> 10 -> 20 -> 30 -> (back to head)
+
+    cout << "Deleting 10...\n";
+    deleteByValue(head, 10);
+    display(head);
+
+    cout << "Searching for 20: " << (search(head, 20) ? "Found" : "Not Found") << endl;
+
+    cout << "Deleting head...\n";
+    deleteAtHead(head);
+    display(head);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
 class Node
 {
 public:
