@@ -378,7 +378,7 @@ node* merger(node* head,node* head2){
 // ---------------------------
 // Main Function
 // ---------------------------
-int main()Fa
+int main()
 {
     
     node *head = new node(10);
