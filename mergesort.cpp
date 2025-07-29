@@ -9,7 +9,7 @@ void merge(vector<int>& arr, int left, int mid, int right) {
 
     // Temporary arrays
     vector<int> L(n1), R(n2);
-a
+aa
     // Copy data to temp arrays L[] and R[]
     for (int i = 0; i < n1; i++)
         L[i] = arr[left + i];
