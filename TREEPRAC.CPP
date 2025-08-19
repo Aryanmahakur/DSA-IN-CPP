@@ -22,6 +22,26 @@ int findheight(node* temp){
   return 1 + max(findheight(temp->left),findheight(temp->right));
    
 }
+int findnode(node* temp){
+      if(temp==nullptr){
+    return 0;
+
+  }
+ 
+  return 1 + findnode(temp->left) + findnode(temp->right);
+}
+int findleavenode(node* temp){
+     if(temp==nullptr){
+    return 0;
+
+  }
+
+  if(temp->right==nullptr&&temp->left==nullptr){
+    return 1;
+  }
+  return findleavenode(temp->right)+ findleavenode(temp->left);
+}
+
 int main()
 {
     node *temp = new node(1);
@@ -33,4 +53,6 @@ int main()
     temp->right->right = new node(7);
 
    cout<<findheight(temp)<<endl;
+   cout<<findnode(temp)<<endl;
+   cout<<findleavenode(temp)<<endl;
 }

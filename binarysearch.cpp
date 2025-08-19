@@ -32,7 +32,7 @@ int binarySearchDescending(int arr[], int n, int target) {
             high = mid - 1;
     }
     return -1;
-}
+}a
 
 // First and Last Occurrence using Linear Search
 vector<int> firstLastOccurrence(int arr[], int target, int n) {
