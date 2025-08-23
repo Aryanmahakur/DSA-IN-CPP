@@ -141,45 +141,53 @@ Node *deleteNode(Node *root, int key)
             delete root;
             return temp;
         }
-     //   else if
-        
-            Node *successor = findMin(root->right);
-            root->data = successor->data;
-            root->right = deleteNode(root->right, successor->data);
-        
+        //   else if
+
+        Node *successor = findMin(root->right);
+        root->data = successor->data;
+        root->right = deleteNode(root->right, successor->data);
+
         return root;
     };
 
-    bool ifbst(Node* root, int minVal, int maxVal) {
-    if (root == nullptr) return true;
+    bool ifbst(Node * root, int minVal, int maxVal)
+    {
+        if (root == nullptr)
+            return true;
 
-    // Value must be in (minVal, maxVal)
-    if (root->data <= minVal || root->data >= maxVal)
-        return false;
+        // Value must be in (minVal, maxVal)
+        if (root->data <= minVal || root->data >= maxVal)
+            return false;
 
-    // Recursively check left and right subtree with updated bounds
-    return ifbst(root->left, minVal, root->data) &&
-           ifbst(root->right, root->data, maxVal);
-}Node* inorderSuccessor(Node* root, Node* target) {
-    Node* successor = nullptr;
+        // Recursively check left and right subtree with updated bounds
+        return ifbst(root->left, minVal, root->data) &&
+               ifbst(root->right, root->data, maxVal);
+    }
+    Node *inorderSuccessor(Node * root, Node * target)
+    {
+        Node *successor = nullptr;
 
-    while (root != nullptr) {
-        if (target->data < root->data) {
-            successor = root;        // Potential successor
-            root = root->left;
+        while (root != nullptr)
+        {
+            if (target->data < root->data)
+            {
+                successor = root; // Potential successor
+                root = root->left;
+            }
+            else
+            {
+                root = root->right; // Move right, successor not here
+            }
         }
-        else {
-            root = root->right;      // Move right, successor not here
-        }
+
+        return successor;
     }
 
-    return successor;
-}
-
-// Wrapper so you can just call ifbst(root)
-bool ifbst(Node* root) {
-    return ifbst(root, INT_MIN, INT_MAX);
-}
+    // Wrapper so you can just call ifbst(root)
+    bool ifbst(Node * root)
+    {
+        return ifbst(root, INT_MIN, INT_MAX);
+    }
 }
 // Main function
 int main()
